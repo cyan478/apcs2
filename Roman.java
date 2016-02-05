@@ -1,4 +1,4 @@
-public class Roman implements Comparable<Roman>{
+public class Roman extends Number implements Comparable<Roman>{
 
     private int _n;
     private String _numeral;
@@ -41,6 +41,23 @@ public class Roman implements Comparable<Roman>{
     //implement comparable interface
     public int compareTo(Roman rhs){
 	return this._n - rhs._n;
+    }
+
+    //abstract methods in Number.java
+    public double doubleValue(){
+	return (double)_n;
+    }
+
+    public float floatValue(){
+	return (float)_n;
+    }
+
+    public int intValue(){
+	return (int)_n;
+    }
+
+    public long longValue(){
+	return (long)_n;
     }
 
     public static void main(String [] args){
