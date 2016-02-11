@@ -21,10 +21,6 @@ public class Permutations{
 	    pH(str.substring(0,i) + str.substring(i+1), 
 	       ans + str.substring(i,i+1));
 	}
-	
-	
-	
-	
     }
 
     public static void main(String[] args){
