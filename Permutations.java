@@ -15,13 +15,11 @@ public class Permutations{
 
     //HELPER FUNCTION; recursively
     private static void pH(String str, String ans){
-	if (str.length() <= 1){
-	    ans += str + "\n";
+	if (str.length() == 0)
 	    System.out.println(ans);
-	}
-	for (int i = 0;i < str.length(); ++){
-	    pH(str.substring(1), ans + str.substring(0,1));
-	    str = str.substring(1) + str.substring(0,0);
+	for (int i = 0;i < str.length(); i++){
+	    pH(str.substring(0,i) + str.substring(i+1), 
+	       ans + str.substring(i,i+1));
 	}
 	
 	
