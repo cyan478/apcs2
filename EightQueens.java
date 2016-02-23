@@ -33,6 +33,32 @@ public class EightQueens{
 	_n = 0;
     }
 
+    //if you can place a q in spot n
+    public boolean availableSpot(int[] row, int n){
+	for (int i = 0; i < n; i++){
+	    if (row[i] == row[n]) //same column
+		return false; 
+	    if ((row[i] - row[n]) == (n-i)) //diagonal 1
+		return false; 
+	    if((row[n] - row[i]) == (n-i)) //diagonal 2
+		return false;
+	}
+	return true;	    
+    }
+
+    //print the board
+    public static void printBoard(int [] row){
+	int N = row.length;
+	for (int i = 0; i < N; i++){
+	    for (int j = 0; j < N; j++){
+		if (row[i] == j) System.out.print("q");
+		else System.out.print("-");
+	    }
+	    System.out.println();
+	}
+	System.out.println();
+    }
+
     public void solve(){
 	int N = _board.length;
 	for (int i = 0; i <= N / 2; i++){
@@ -50,8 +76,12 @@ public class EightQueens{
 	    Thread.currentThread().interrupt();
 	}
 	int N = _board.length;
-	
-	
+	for (int x = 0; x < N; x++){
+	    for (int y = 0; y < N; y++){
+	        if 
+		
+		
+
     }
     
 
