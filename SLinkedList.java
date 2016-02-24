@@ -44,7 +44,54 @@ public class SLinkedList{
 
     public String removeLast(){
 	if (_size <= 1) return removeFirst();
-	
+	Node last = _tail;
+	Node penUlt = _head;
+	for (int i = 0; i < _size-2; i++)
+	    punUlt = penUlt.getNext();
+	penUlt.setNext(null);
+	_tail = penUlt;
+	_size--;
+	return last.getValue();
+    }
+
+    //LAB #1 DUR THURS 2/25
+    /*
+      1. Write the method getFirst() that returns the value stored in the 
+      first node.
+
+      // postcondition: throws an  Illegal State Exception if the list is empty
+      //                otherwise returns the first value.
+   */
+    public String getFirst(){
+	if (_size == 0) throw new IllegalStateException();
+	return _head.getValue();
+    }
+
+    public String getLast(){
+	if (_size == 0) throw new IllegalStateException();
+	return _tail.getValue();
+    }
+
+    public String get(int i){
+	if (i < 0 || i >= size) throw new IllegalStateException();
+	Node now = _head;
+	for (int x = 0; x < i; x++)
+	    now = now.getNext();
+	return now.getValue();
+    }
+
+    public SLinkedList append(SLinkedList L){
+	SLinkedList ans = new SLinkedList();
+	for (int i = 0; i < this.size(); i++) //makes a copy of this
+	    ans.addLast(this.get(i));
+	for (int j = 0; j < L.size(); j++) //copy of L
+	    ans.addLast(L.get(j));
+	return ans;
+    }
+
+    public void reverse(){
+	if (size <= 1) return;
+	if
     }
 
     //O(n)
