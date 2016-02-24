@@ -20,21 +20,9 @@ Bulid a program to solve the Eight Queens problem.
 
 public class EightQueens{
 
-    private int [][] _board;
-    private int _n;
-
-    public EightQueens(){
-	_board = new int [8][8];
-	_n = 0;
-    }
-
-    public EightQueens(N){
-	_board = new int [N][N];
-	_n = 0;
-    }
-
-    //if you can place a q in spot n
-    public boolean availableSpot(int[] row, int n){
+    
+    //Can you place a q in spot n?
+    public static boolean availableSpot(int[] row, int n){
 	for (int i = 0; i < n; i++){
 	    if (row[i] == row[n]) //same column
 		return false; 
@@ -46,61 +34,42 @@ public class EightQueens{
 	return true;	    
     }
 
-    //print the board
+    //prints the board
     public static void printBoard(int [] row){
 	int N = row.length;
+	String tile = "";
 	for (int i = 0; i < N; i++){
 	    for (int j = 0; j < N; j++){
-		if (row[i] == j) System.out.print("q");
-		else System.out.print("-");
+		if (row[i] == j) tile += "q";
+		else tile += "-";
 	    }
-	    System.out.println();
+	    tile += "\n"; //new row
 	}
-	System.out.println();
+	System.out.println(tile);
     }
 
-    public void solve(){
-	int N = _board.length;
-	for (int i = 0; i <= N / 2; i++){
-	    for (int j = 0; j <= N / 2; j++){
-		if (solve(i,j)) return;
+    public static void solve(int [] row, int tile, int numOfRows){
+	//try {
+	//    Thread.sleep(10); //1000 milliseconds is one second.
+	//	} 
+	//catch(InterruptedException ex) {
+	//    Thread.currentThread().interrupt();
+	//}
+	int N = numOfRows;
+	if (tile == N) printBoard(row); //when you're finished, print
+	else{
+	    for (int i = 0; i < N; i++){ //for each space in the row
+		row[tile] = i; //space in row = i
+		if (availableSpot(row, tile)) //if there is space
+		    solve(row, tile+1, N); //go to next branch (next space)
 	    }
 	}
     }
-
-    public boolean solve(int x, int y){
-	try {
-	    Thread.sleep(10); //1000 milliseconds is one second.
-	} 
-	catch(InterruptedException ex) {
-	    Thread.currentThread().interrupt();
-	}
-	int N = _board.length;
-	for (int x = 0; x < N; x++){
-	    for (int y = 0; y < N; y++){
-	        if 
-		
-		
-
-    }
-    
-
-
 
     public static void main(String [] args){
 	int N = Integer.parseInt(args[0]);
-	EightQueens q = new EightQueens(N);
-	// System.out.println(q);
-	q.solve();
-	System.out.println(q);
-	//}
-
+        int [] board = new int[N];
+        solve(board, 0, N);
     }
-
-
-    
-
-
-
 
 } //end
