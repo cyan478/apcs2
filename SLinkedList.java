@@ -47,7 +47,7 @@ public class SLinkedList{
 	Node last = _tail;
 	Node penUlt = _head;
 	for (int i = 0; i < _size-2; i++)
-	    punUlt = penUlt.getNext();
+	    penUlt = penUlt.getNext();
 	penUlt.setNext(null);
 	_tail = penUlt;
 	_size--;
@@ -55,31 +55,29 @@ public class SLinkedList{
     }
 
     //LAB #1 DUR THURS 2/25
-    /*
-      1. Write the method getFirst() that returns the value stored in the 
-      first node.
 
-      // postcondition: throws an  Illegal State Exception if the list is empty
-      //                otherwise returns the first value.
-   */
+    //O(1)
     public String getFirst(){
-	if (_size == 0) throw new IllegalStateException();
+	if (size() == 0) throw new IllegalStateException();
 	return _head.getValue();
     }
 
+    //O(1)
     public String getLast(){
-	if (_size == 0) throw new IllegalStateException();
+	if (size() == 0) throw new IllegalStateException();
 	return _tail.getValue();
     }
 
     public String get(int i){
-	if (i < 0 || i >= size) throw new IllegalStateException();
+	if (i < 0 || i >= size()) throw new IllegalStateException();
 	Node now = _head;
 	for (int x = 0; x < i; x++)
 	    now = now.getNext();
 	return now.getValue();
     }
 
+    /*
+    //O(n^2) APPEND
     public SLinkedList append(SLinkedList L){
 	SLinkedList ans = new SLinkedList();
 	for (int i = 0; i < this.size(); i++) //makes a copy of this
@@ -88,11 +86,80 @@ public class SLinkedList{
 	    ans.addLast(L.get(j));
 	return ans;
     }
+    */
 
+    //O(1) APPEND
+    public SLinkedList append(SLinkedList L){
+	SLinkedList ans = new SLinkedList();
+	Node n = this._head;
+	for (int i = 0; i < this.size(); i++){
+	    ans.addLast(n.getValue()); //O(1)
+	    n = n.getNext();
+	}
+	n = L._head; //start of second list
+	for (int j = 0; j < L.size(); j++){
+	    ans.addLast(n.getValue()); //O(1)
+	    n = n.getNext();
+	}
+	return ans;
+    }
+
+    /* REVERSE W HELPER FUNCTION
+    private void reverseR(int pos, String last){
+	if (pos < size()){
+	    addLast(_head.getValue());
+	    removeFirst();
+	    reverseR(pos++,last);
+	}
+    }
     public void reverse(){
 	if (size <= 1) return;
-	if
+        reverseR(0,_tail.getValue());
     }
+    */
+    
+    /*
+    //REVERSE W NORMAL RECURSION
+    public void reverse(){
+	reverseR(0,_tail.getValue());
+    }
+
+    public void reverse2(){
+	if(size() <= 1) return;
+	String t = removeFirst();
+	reverse2(); //when this terminates, addLast(t) happens
+	addLast(t);
+    }
+    */
+
+    public Node search(String key){
+	Node current = _head;
+	for (int i = 0; i < size(); i++){
+	    if (current.getValue().equals(key))
+		return current;
+	    current = current.getNext();
+	}
+	return null;
+    }
+
+    public void swap(Node x, Node y){
+        String strX = x.getValue();
+	Node nextX  = x.getNext();
+	String strY = y.getValue();
+	Node nextY = y.getNext();
+	x.setValue(strY);
+	x.setNext(nextY);
+	y.setValue(strX);
+	y.setNext(nextX);
+	Node current = _head; //the Nodes before x/y
+	for (int i = 0; i < size(); i++){
+	    if (current.getNext() == x)
+		current.setNext(y);
+	    else if (current.getNext() == y)
+		current.setNext(x);
+	}
+    }
+
 
     //O(n)
     public String toString(){
@@ -101,8 +168,8 @@ public class SLinkedList{
 	for (int i = 0; i < _size; i++){
 	    ans += current.getValue()+" ";
 	    current = current.getNext();
-	}
-    
+	}    
+	return "";
     }
 
     public static void main(String[] args){
@@ -114,6 +181,9 @@ public class SLinkedList{
 	System.out.println(L); //Mary Sue //flipped
 	L.addLast("Bill");
 	System.out.println(L); //Bill Mary Sue //flipped
+	L.addLast("Nick");
+	//L.swap(L.search("Mary"),L.search("Bill"));
+	//System.out.println(L);
     }
 
 
