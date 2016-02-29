@@ -142,7 +142,9 @@ public class SLinkedList{
 	return null;
     }
 
+    /*
     public void swap(Node x, Node y){
+	if (x == y) return;
         String strX = x.getValue();
 	Node nextX  = x.getNext();
 	String strY = y.getValue();
@@ -158,6 +160,30 @@ public class SLinkedList{
 	    else if (current.getNext() == y)
 		current.setNext(x);
 	}
+    }
+    */
+
+    public void swap(Node x, Node y){
+	if (x == y) return;
+	Node prevX = new Node(null,_head);
+	while (prevX.getNext() != x && prevX.getNext() != y)
+	    prevX = prevX.getNext();
+	if ( prevX.getNext() == y){ //if getNext() hits y first, swap x and y ref
+	    Node t = x;
+	    x = y;
+	    y = t;
+	}
+	// x precedes y
+	Node prevY = prevX.getNext();
+	while ( prevY.getNext() != y)
+	    prevY = prevY.getNext();
+	if (_head == x) _head = y;
+	if (_tail == y) _tail = x;
+	prevX.setNext(y);
+	prevY.setNext(x);
+	Node afterY = y.getNext();
+	y.setNext(x.getNext());
+	x.setNext(afterY);
     }
 
 
