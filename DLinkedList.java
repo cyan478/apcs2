@@ -86,12 +86,10 @@ public class DLinkedList{
     //                Throw an exception if index < 0 || index >= size()
     public String get(int i){
 	if (i < 0 || i >= size()) throw new IllegalArgumentException();
-	Node current = getFirst();
+	DNode current = getFirst();
 	for (int j = 0; j <= i; j++)
-	    if (j != i)
 		current = current.getNext();
-	    else
-		return current.getValue();
+	return current.getValue();
     }
 
     //precondition: v != null and v refers to a node in the list
@@ -100,8 +98,8 @@ public class DLinkedList{
     //              Throws exception if v is header or trailer.
     public void remove(DNode v){
 	if (v == _header || v == _trailer) throw new IllegalArgumentException();
-	Node afterV = v.getNext();
-	Node beforeV = v.getPrevious();
+	DNode afterV = v.getNext();
+	DNode beforeV = v.getPrevious();
 	beforeV.setNext(afterV);
 	afterV.setPrevious(beforeV); 
     }
@@ -110,8 +108,8 @@ public class DLinkedList{
     //                Throws an exception if the list is empty.   
     public String removeFirst(){
 	if (isEmpty()) throw new IllegalArgumentException();
-	String first = getFirst.getValue();
-	Node afterFirst = getFirst.getNext();
+	String first = getFirst().getValue();
+	DNode afterFirst = getFirst().getNext();
 	_header.setNext(afterFirst);
 	afterFirst.setPrevious(_header);
 	return first;
@@ -121,8 +119,8 @@ public class DLinkedList{
     // 		      Throws an exception if the list is empty.
     public String removeLast(){
 	if (isEmpty()) throw new IllegalArgumentException();
-	String last = getLast.getValue();
-	Node beforeLast = getLast.getPrevious();
+	String last = getLast().getValue();
+	DNode beforeLast = getLast().getPrevious();
 	_trailer.setPrevious(beforeLast);
         beforeLast.setNext(_trailer);
 	return last;
