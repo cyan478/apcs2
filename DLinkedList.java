@@ -102,17 +102,16 @@ public class DLinkedList{
 	DNode beforeV = v.getPrevious();
 	beforeV.setNext(afterV);
 	afterV.setPrevious(beforeV); 
+	_size--;
     }
 
     // postcondition: removes the first Node and returns its string.
     //                Throws an exception if the list is empty.   
     public String removeFirst(){
 	if (isEmpty()) throw new IllegalArgumentException();
-	String first = getFirst().getValue();
-	DNode afterFirst = getFirst().getNext();
-	_header.setNext(afterFirst);
-	afterFirst.setPrevious(_header);
-	return first;
+	DNode temp = getFirst();
+	remove(getFirst());
+	return temp.getValue();
     }
 
     // postcondition: removes the last node and returns its string.
@@ -126,6 +125,21 @@ public class DLinkedList{
 	return last;
     }
        
+    public DNode middleNode(){
+	if (isEmpty()) throw new IllegalArgumentException();
+	DNode current1 = _header;
+	DNode current2 = _trailer;
+        while (true){
+	    if (a == b) return a;
+	    a.getNext(a);
+	    if (a == b) return a;
+	    b.getPrevious(b);
+	}
+    }
+
+    public void swap(DNode x, DNode y){
+	
+    }
     
     //postcond: [] if list is empty
     //          [a ] if one element
@@ -133,8 +147,10 @@ public class DLinkedList{
     public String toString(){
 	String ans = "[";
 	DNode current = _header;
-	for (int i = 0; i < size()-1; i++)
-	    ans += current.getNext() + ", ";
+	for (int i = 0; i < size()-1; i++){
+	    current = getNext(current);
+	    ans += current + ", ";
+	}
 	ans += _trailer.getPrevious().getValue() + " ";
 	ans += "]";
 	return ans;
@@ -144,10 +160,15 @@ public class DLinkedList{
 
     public static void main(String[] args){
 	DLinkedList L = new DLinkedList();
-	System.out.println("size: " + L.size());
+	//System.out.println("size: " + L.size());
 	L.addLast("Jane");
+	L.addLast("Carol");
+	L.addLast("Bob");
 	L.addLast("Yay");
+	//L.addLast("Janny");
 	System.out.println(L);
+	System.out.println(L.middleNode());
+	
     }
 
     
