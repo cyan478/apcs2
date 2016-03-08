@@ -138,7 +138,12 @@ public class DLinkedList{
     }
 
     public void swap(DNode x, DNode y){
-	
+	x.getPrevious().setNext(y);
+	y.getPrevious().setNext(x);
+	x.getNext().setPrevious(y);
+	y.getNext().setPrevious(x);
+	x.setPrevious(y.setPrevious(x.getPrevious));
+	x.setNext(y.setNext(x.getNext()));
     }
     
     //postcond: [] if list is empty
