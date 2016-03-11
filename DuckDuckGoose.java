@@ -3,14 +3,12 @@ import java.util.ArrayList;
 public class DuckDuckGoose{
 
     private CircleList _circle;
-    //private boolean _first;
 
 
     // *** Question 4 ****
     // Transfer the names from the ArrayList into a CircleList.
     public DuckDuckGoose(ArrayList<String> names){
 	_circle = new CircleList();
-	//_first = true;
 	for (int i = 0; i < names.size(); i++){
 	    Node NAME = new Node(names.get(i),null);
 	    _circle.add(NAME);
@@ -37,30 +35,25 @@ public class DuckDuckGoose{
 	else{
 	    Node it = chooseIt();
 	    for (int i = 0; i < n; i++){
-		/*
-		System.out.println("kids: " + _circle); //prints out first line of all kids
-		if (_first){
-		    Node it = chooseIt();
-		    _first = false;
-		}
-		*/
 		System.out.println("It: " + it);
 		System.out.println("kids: " + _circle);
 	        while (Math.random() < 0.75){
-		    _circle.advance();
 		    System.out.println("Duck: " + _circle.getCursor());
+		    _circle.advance();
 		}
 		Node picked = _circle.getCursor();
 		System.out.println("Goose: " + picked);
 		System.out.println("Race between: " + it + " and " + picked);
 		int r = (int)(Math.random() * 2);
 		if (r == 0){ //if r is winner for it
-		    System.out.println(
+		    System.out.println(it + " wins race.");
 		    _circle.remove();
 		    _circle.add(it);
 		    it = picked;
 		}
-		System.out.println(_circle);
+		else if (r == 1)
+		    System.out.println(picked + " wins race.");
+		System.out.println("kids: " + _circle);
 	    }
 	}
     }
@@ -78,8 +71,9 @@ public class DuckDuckGoose{
 	// Declare and instantiate a DuckDuckGoose object.
 	DuckDuckGoose ddg = new DuckDuckGoose(kids);
 	// The constructor's argument will be an ArrayList of Strings.    
-	System.out.println(ddg);
-	ddg.play(3);
+	System.out.println("kids: " + ddg);
+	int input = Integer.parseInt(args[0]);
+	ddg.play(input);
     }
 
 
