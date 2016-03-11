@@ -1,20 +1,37 @@
-//uses nodes
-//no tail/head; uses a cursor
-
 public class CircleList{
 
-    private int _size;
     private Node _cursor;
+    private int _size;
 
+    // constructor 
     public CircleList(){
-	_size = 0;
 	_cursor = null;
+	_size = 0;
     }
 
-    public CircleList(String value){
-	_size = 1;
-	//_cursor = new Node(value, _cursor);
+
+    public Node getCursor(){
+	return _cursor;
     }
+
+
+    // Adds a node after the cursor
+    // If the list is empty adds at the cursor
+    public void add(Node newNode){
+	Node t ;
+	if (isEmpty()){
+	    
+	    _cursor = newNode;
+	    t = _cursor;
+	}
+	else{
+	    t = _cursor.getNext();
+	    _cursor.setNext(newNode);
+	}
+	newNode.setNext(t);
+	_size++;
+    }
+
 
     public int size(){
 	return _size;
@@ -23,66 +40,52 @@ public class CircleList{
     public boolean isEmpty(){
 	return size() == 0;
     }
-
-    public Node getCursor(){
-	return _cursor;
-    }
-
     public void advance(){
 	_cursor = _cursor.getNext();
     }
 
-    public void add(Node newNode){
-	if (isEmpty()){
-	    _cursor = newNode;
-	    newNode.setNext(newNode);
-	}
-	else{
-	    newNode.setNext(_cursor.getNext());
-	    _cursor.setNext(newNode);
-	}
-	_size++;
-    }
-
     public Node remove(){
-	if (isEmpty()) throw new IllegalStateException();
-	Node temp = _cursor.getNext();
-	if (size() == 1)
-	    _cursor = null;
-	else
-	    _cursor.setNext(temp.getNext());
-	_size--;
-	temp.setNext(null); //no association/access point anymore
-	return temp;
-    }
-
-    public String toString(){
-	String ans = "[";
-	Node current = _cursor;
-	for (int i = 0; i < size(); i++){
-	    if (i == size() - 1)
-		ans += current;
-	    else 
-		ans += current +", ";
-	    current = current.getNext();
-	}
-	ans += "]";
+	if (isEmpty()) throw new IllegalStateException("empty list");
+	Node ans = _cursor.getNext();
+	Node n = ans.getNext();
+	ans.setNext(null);
+	if (size() == 1) _cursor = null;
+	else  _cursor.setNext(n);
+	--_size;
 	return ans;
     }
 
-    public static void main(String[] args){
-	CircleList L = new CircleList();
-	L.add(new Node("Abe", null));
-	L.add(new Node("Betty",null));
-	L.advance();
-	L.add(new Node("Ada",null));
-	System.out.println(L);
-	L.advance();
-	L.advance();
-	System.out.println(L);
-	System.out.println(L.remove());
-	System.out.println(L);
-	
+
+    public String toString(){
+	String ans = "";
+	Node t = _cursor;
+	for (int i = 0; i < size(); i++){
+	    ans += t + ", ";
+	    t = t.getNext();
+	} 
+	int len = ans.length();
+	if (len > 0) ans = ans.substring(0,len - 2);
+	return "[" + ans + "]";
     }
 
-} //end
+
+    public static void main(String [] args){
+	CircleList L = new CircleList();
+	System.out.println(L);
+	L.add(new Node("Abe",null));
+	System.out.println(L);
+	L.add(new Node("Betty", null));
+	System.out.println(L);
+	L.advance();
+	L.add(new Node("Ada", null));
+	L.advance();
+	L.advance();
+	System.out.println(L);
+	
+	while (!L.isEmpty()){
+	    System.out.println(L.remove());
+	    System.out.println(L);
+	}
+
+    }
+}

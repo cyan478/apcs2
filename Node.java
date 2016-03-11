@@ -3,12 +3,12 @@ public class Node{
     private String _value;
     private Node _next;
 
-    public Node(String value, Node next){
-	_value = value;
+   
+    public Node (String val, Node next){
+	_value = val;
 	_next = next;
     }
 
-    //accessor methods
     public String getValue(){
 	return _value;
     }
@@ -17,37 +17,24 @@ public class Node{
 	return _next;
     }
 
-    //modifier methods
-    public String setValue(String str){
-	String ans = getValue();
-	_value = str;
-	return ans;
-    }
-
-    public Node  setNode(Node t){
-	Node ans = getNext();
+    public Node setNext(Node t){
+	Node ans = _next;
 	_next = t;
 	return ans;
     }
-    
+
+
     public String toString(){
-	return getValue();
+	return _value;
     }
 
-    public static void main(String[] args){
-	Node a = new Node("Bill",new Node("Mary", new Node("Sue",null)));
-	System.out.println(a); //Bill
-	System.out.println(a.getNext()); //Mary
-	System.out.println(a.getNext().getNext()); //Sue
-	System.out.println(a.getNext().getNext().getNext()); //null
-	//System.out.println(a.getNext().getNext().getNext().getNext()); //NullPointer Exception (runtime error)
+    public static void main(String [] args){
+	Node a = new Node("Bob", null);
+	Node b = new Node("Sam",a);
+	System.out.println(a);
+	System.out.println(b);
+	System.out.println(a.getNext());
+	System.out.println(b.getNext());
     }
 
-
-    
-
-
-
-
-
-} //end
+}
