@@ -11,6 +11,13 @@ public class InsertionSort{
 	}
     }
 
+    public static void createDList(ArrayList<String> rlist, DLinkedList dlist){
+	for (int i = 0; i < rlist.size(); i++){
+	    DNode a = new DNode(rlist.get(i), null, null);
+	    dlist.addLast(a);
+	}
+    }
+
     public static void walkingDown(ArrayList<String> sort,int i){
 	if (i <= 0) return;
 	if (sort.get(i-1).compareTo(sort.get(i)) > 0){
@@ -22,19 +29,26 @@ public class InsertionSort{
 
  
     public static void play(ArrayList<String> sort, int N){
-	createList(sort, N);
-	    System.out.println("Random: " + sort);
-	    for (int i = 1; i < sort.size(); i++){
-		System.out.println("start pass: " + i + " " +sort );
-		System.out.println("walk down " + sort.get(i));
-	        walkingDown(sort, i);
-	    }
+	System.out.println("Random: " + sort);
+	for (int i = 1; i < sort.size(); i++){
+	    System.out.println("start pass: " + i + " " +sort );
+	    System.out.println("walk down " + sort.get(i));
+	    walkingDown(sort, i);
 	}
+    }
 
-	public static void main(String[] args){
-	    int N = Integer.parseInt(args[0]);
-	    ArrayList<String> sort = new ArrayList<String>();
-	    play(sort, N);
-	}
+    public static void main(String[] args){
+	int N = Integer.parseInt(args[0]);
+	ArrayList<String> sort = new ArrayList<String>();
+	createList(sort, N);
+	System.out.println("shuffled arraylist: " + sort);
+	DLinkedList dlink = new DLinkedList();
+	createDList(sort, dlink);
+	System.out.println("Doubly linked list: " + dlink); 
+
+
+
+	//play(sort, N);
+    }
 
 } //end
