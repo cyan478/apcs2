@@ -21,19 +21,23 @@ public class ScoresArray{
     }
 
     public boolean add(GameEntry entry){
-	int newScore = entry.getScore();
-	int storedEntry = entry;
-	for (int i = 0; i < _numScores(); i++){
-	    int currentScore = _score[i];
-	    if (currentScore - newScore < 0){
-		storedEntry = _score[i];
-	        break;
+	GameEntry current = entry;
+	for (int i = 0; i < _scores.length; i++){
+	    if (current.compareTo(_scores[i]) > 0){
+		GameEntry temp = current;
+		current = _scores[i];
+		_scores[i] = temp;
 	    }
-	    return false;
 	}
-	for (int i = numScore
-	    
+	return current != entry;
     }
+
+    public void initialize(int maxScore, int len){
+	for (int i = 0; i < _scores.length; i++){
+	    GameEntry entry = GameEntry.randomEntry(maxScore,len);
+	    if(add(entry)
+		
+]
 
     public String toString(){
 	String ans = "";
@@ -47,10 +51,13 @@ public class ScoresArray{
     }
 
     public static void main(String[] args){
-	ScoresArray a = new ScoresArray();
-	System.out.println("scores: " + a.numScores());
-	System.out.println("top entry: " + a.topEntry());
-	System.out.println(a.toString());
+	ScoresArray s = new ScoresArray();
+	//System.out.println("scores: " + s.numScores());
+	//System.out.println("top entry: " + s.topEntry());
+	//System.out.println(s.toString());
+	GameEntry b = GameEntry.randomEntry(2000,3);
+	s.add(b);
+	System.out.println(s);
     }
 
 
