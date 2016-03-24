@@ -38,5 +38,8 @@ public class GameNode{
 	return ans;
     }
     
+    public String toString(){
+	return _entry+"";
+    }
 
 }
