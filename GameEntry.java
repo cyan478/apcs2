@@ -34,7 +34,7 @@ public class GameEntry implements Comparable<GameEntry>{
     }
 
     public String toString(){
-	return _name + ".........." + _score;
+	return _name + "............. " + _score;
     }
 
 
