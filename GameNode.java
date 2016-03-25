@@ -21,7 +21,6 @@ public class GameNode{
 	return _previous;
     }
 
-    //modifier
     public GameEntry setValue(GameEntry x){
 	GameEntry ans = getEntry();
 	_entry = x;
