@@ -1,0 +1,7 @@
+public class FullStackException extends RuntimeException{
+
+    public FullStackException(E error){
+	super(error);
+    }
+
+} //end

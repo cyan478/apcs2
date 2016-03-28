@@ -1,0 +1,9 @@
+public class ArrayStack<E> implements Stack<E>{
+
+    private E[] _stack;
+    private int _capacity; //not size, capacity = array.length
+    private int _top; //index position of top of stack
+    
+    public final int CAPACITY = 1000;
+
+} //end
