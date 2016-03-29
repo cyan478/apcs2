@@ -1,17 +1,19 @@
-import java.util.List;
-
 public class ArrayStack<E> implements Stack<E>{
 
     private E[] _stack;
     private int _capacity; //not size, capacity = array.length
     private int _top; //index position of top of stack
     
-    public final int CAPACITY = 1000;
+    public static final int CAPACITY = 1000;
 
     public ArrayStack(int capacity){
 	_stack = (E[]) new Object[capacity];
 	_capacity = capacity;
 	_top = -1;
+    }
+
+    public ArrayStack(){
+	this(CAPACITY);
     }
 
     //O(1)
@@ -39,24 +41,9 @@ public class ArrayStack<E> implements Stack<E>{
     //O(1)
     public E pop() throws EmptyStackException{
 	if (isEmpty()) throw new EmptyStackException("Stack is empty");
-	return _stack[_top--]; //subtract 1 to top LAST
+	E ans = top();
+	_stack[_top--] = null; //sets _stack[top] to null, decrements by 1
+	return ans;
     }
-
-    public static void reverse(List<Integer> L){
-	int N = L.size();
-	for (int i = 0; i < N; i++)
-	    this.push(L.get(i));
-	for (int i = 0; i < N; i++)
-	    L.set(i, this.pop());
-    }
-
-
-    public static void main(String[] args){
-	ArrayStack<Integer> s = new ArrayStack(1000);
-	List<Integer> l = {1,2,3,4,5,6};
-	s.reverse(l);
-	System.out.println(l);
-    }
-    
 
 } //end
