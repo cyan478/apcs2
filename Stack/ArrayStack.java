@@ -21,7 +21,7 @@ public class ArrayStack<E> implements Stack<E>{
     }
     
     public void push (E element) throws FullStackException{
-	if (size() == capacity) throw new FullStackException("Stack is full");
+	if (size() == CAPACITY) throw new FullStackException("Stack is full");
 	_stack[++_top] = element; //add 1 to top FIRST
     }
 
