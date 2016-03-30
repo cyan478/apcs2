@@ -17,6 +17,21 @@ public class Reverse{
 	}
     }
 
+    public static <E> boolean inStack(Stack<E> stack, E value){
+	boolean ans = false;
+	Stack<E> aux = new NodeStack<E>();
+	while (!stack.isEmpty()){
+	    if (value.equals(stack.top())){
+		ans = true;
+		break;
+	    }
+	    aux.push(stack.pop());
+	}
+	while (!aux.isEmpty())
+	    stack.push(aux.pop());
+	return ans;
+    }
+
     public static void main(String[] args){
 	ArrayList<Integer> L = new ArrayList<Integer>();
 	for (int i = 0; i < 10; i++)
