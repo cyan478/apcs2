@@ -1,11 +1,10 @@
 public class Node<E>{
-
+    
     private E _value;
     private Node<E> _next;
 
-   
-    public Node (E val, Node<E> next){
-	_value = val;
+    public Node(E value, Node<E> next){
+	_value = value;
 	_next = next;
     }
 
@@ -13,19 +12,25 @@ public class Node<E>{
 	return _value;
     }
 
+
     public Node<E> getNext(){
 	return _next;
     }
 
-    public Node<E> setNext(Node t){
-	Node ans = _next;
-	_next = t;
+    public E setValue(E value){
+	E ans = getValue();
+	_value = value;
+	return ans;
+    }
+
+    public Node<E> setNext(Node<E> next){
+	Node<E> ans = getNext();
+	_next = next;
 	return ans;
     }
 
 
-    public String toString(){
-	return _value;
-    }
+
+
 
 }
