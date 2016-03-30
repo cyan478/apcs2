@@ -2,7 +2,6 @@ public class NodeStack<E> implements Stack<E>{
 
     private int _size;
     private Node<E> _stackHead;
-    private Node<E> _stackTail;
 
     public NodeStack(){
 	_size = 0;
@@ -19,8 +18,6 @@ public class NodeStack<E> implements Stack<E>{
 
     public void push(E value){
 	_stackHead = new Node<E>(value, _stackHead);
-	if (isEmpty())
-	    _stackTail = _stackHead;
 	_size++;
     }
     
@@ -30,14 +27,10 @@ public class NodeStack<E> implements Stack<E>{
     }
 
     public E pop() throws EmptyStackException{
-	if (isEmpty()) throw new EmptyStackException("Stack is empty");
-	Node<E> curr = _stackTail;
-	for (int i = 0; i < size()-1; i++)
-	    curr = curr.getNext();
-	curr = _stackHead;
-	Node<E> originalHead = curr.getNext();
-        originalHead = null;
-	return curr.getValue();
+	E ans = top();
+	_stackHead = _stackHead.setNext(null); //delinks top, returns the getNext too
+	_size--;
+	return ans;
     }
 
   public String toString(){
@@ -49,7 +42,6 @@ public class NodeStack<E> implements Stack<E>{
                 ans += ", " + curr.getValue();
 		curr = curr.getNext();
 	    }
-
 	}
         ans += "]";
         return ans;
