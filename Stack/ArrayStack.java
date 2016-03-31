@@ -46,4 +46,14 @@ public class ArrayStack<E> implements Stack<E>{
 	return ans;
     }
 
+    public void transferTo(ArrayStack<E> rhs){
+	while (!this.isEmpty() && (rhs.size() < rhs._capacity))
+	    rhs.push(this.pop());
+    }
+
+    public static void main(String[] args){
+
+    }
+
+
 } //end
