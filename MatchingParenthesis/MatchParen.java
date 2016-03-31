@@ -22,9 +22,8 @@ public class MatchParen{
     //       from exp.
     public static String filterParen(String exp){
         String ans = "";
-	for (int i = 0; i < exp.length()-1; i++){
-	    if (contains(OPENING, exp.substring(i, i+1)) ||
-	        contains(CLOSING, exp.substring(i, i+1)) )
+	for (int i = 0; i < exp.length(); i++){
+	    if (contains(PARENTHESES, exp.substring(i, i+1)))
 		ans += exp.substring(i,i+1);
 	}
 	return ans;
@@ -34,8 +33,18 @@ public class MatchParen{
     // Uses a stack to check if exp has matching parentheses.
     // pre: is empty or only contains parentheses.
     public static boolean match(String exp){
-        if (exp == "") throw new IllegalArgumentException();
-	
+        Stack<String> s = new ArrayStack<String>();
+	if (exp.length() % 2 == 0) return false; //O(1) if odd length()
+	for (int i = 0; i < exp.length(); i++){ //if isEmpty(), skip
+	    String str = exp.substring(i,i+1);
+	    if (contains(OPENING,str)) s.push(str); //keep stacking OPENING
+	    else{
+		if (s.isEmpty()) return false; //if first one is CLOSING
+		if (OPENING.indexOf(s.pop()) != CLOSING.indexOf(str)) //checks if matches
+		    return false;
+	    }
+	}
+	return s.isEmpty();
     }
 
     // Assuming ()[]{} are the only characters
