@@ -12,7 +12,8 @@ public class MatchParen{
     //       contains("mississippi","Is") -> false
     //       contains("mississippi","ippi") -> true
     public static boolean contains(String exp, String token){
-        // < Your code goes here >
+        if (exp.indexOf(token) == -1) return false;
+	return true;
     }
 
 
@@ -20,14 +21,21 @@ public class MatchParen{
     // post: removes all whitespace characters and non-parentheses
     //       from exp.
     public static String filterParen(String exp){
-        // < Your code goes here >
+        String ans = "";
+	for (int i = 0; i < exp.length()-1; i++){
+	    if (contains(OPENING, exp.substring(i, i+1)) ||
+	        contains(CLOSING, exp.substring(i, i+1)) )
+		ans += exp.substring(i,i+1);
+	}
+	return ans;
     }
 
     //  *********** QUESTION 3 ************************************
     // Uses a stack to check if exp has matching parentheses.
     // pre: is empty or only contains parentheses.
     public static boolean match(String exp){
-        // < Your code goes here >
+        if (exp == "") throw new IllegalArgumentException();
+	
     }
 
     // Assuming ()[]{} are the only characters
