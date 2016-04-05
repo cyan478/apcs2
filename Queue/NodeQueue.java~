@@ -1,0 +1,41 @@
+public class NodeQueue<E> implements Queue{
+
+    private int _size;
+    private Node<E> _front, _rear;
+    
+    public NodeQueue(){
+        _size = 0;
+	_front =  _rear = null;
+    }
+
+    public void enqueue(E element){
+	Node newNode = new Node<E>(element, _rear);
+	if (isEmpty()) 
+	    _front = newNode;
+	_rear = newNode;
+	_size++;
+    }
+
+    public E dequeue() throws EmptyQueueException{
+        Node ans = _front;
+	_front = _front.getNext();
+	ans.setNext(null);
+	return ans;
+    }
+
+    public int size(){
+	return _size;
+    }
+
+    public boolean isEmpty();{
+	return size() == 0;
+    }
+
+    public E front() throws EmptyQueueException{
+	if (isEmpty()) throw new EmptyQueueException("Empty");
+	return _front.getValue();
+    }
+
+
+    
+} //end
