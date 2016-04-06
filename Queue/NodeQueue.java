@@ -1,30 +1,53 @@
 public class NodeQueue<E> implements Queue<E>{
 
-    private int _size;
     private Node<E> _front, _rear;
-    
-    public NodeQueue(){
-        _size = 0;
-	_front =  _rear = null;
+    private int _size;
+
+    public  NodeQueue(){
+	_front = _rear = null;
+	_size = 0;
     }
 
-    public void enqueue(E element){
-	Node<E> newNode = new Node<E>(element, _rear);
-	if (isEmpty()) 
-	    _front = newNode;
-	_rear = newNode;
+    public static<E> void replace (Queue<E> q, E oldValue, E newValue){
+	int N = q.size();
+	Node<E> cursor = q.front();
+	for (int i = 0; i < N; i++){
+	    if (cursor.getValue().equals(oldValue))
+		cursor.setValue(newValue);
+	    cursor = cursor.getNext();
+	}
+    }
+    
+    // O(1)
+    public E front() throws EmptyQueueException{
+	if (isEmpty())
+	    throw new EmptyQueueException("Empty queue.");
+	return _front.getValue();
+    }
+    // O(1)
+    public E dequeue() throws EmptyQueueException{
+	if (isEmpty())
+	    throw new EmptyQueueException("Empty queue.");
+	E ans = front();
+	_front = _front.setNext(null);
+	_size--;
+	if (isEmpty()) _rear = null;
+	return ans;
+    }
+
+    // O(1)
+    public void enqueue(E val){
+	Node<E> newRear = new Node<E>(val,null);
+	if (isEmpty()){
+	    _front = _rear = newRear;
+	}
+	else{
+	    _rear.setNext(newRear);
+	    _rear = newRear;
+	}
 	_size++;
     }
 
-    public E dequeue() throws EmptyQueueException{
-        E ans = front();
-	Node<E> temp = _front;
-	_front = _front.getNext();
-	_size--;
-	if(isEmpty()) _rear = null;
-	temp.setNext(null);
-	return ans;
-    }
 
     public int size(){
 	return _size;
@@ -34,33 +57,41 @@ public class NodeQueue<E> implements Queue<E>{
 	return size() == 0;
     }
 
-    public E front() throws EmptyQueueException{
-	if (isEmpty()) throw new EmptyQueueException("Empty");
-	return _front.getValue();
-    }
-
     public String toString(){
-	String ans = "[";
-	Node<E> cursor = _front;
-	for (int i = 0; i < size(); i++){
-	    ans += cursor.getValue();
-	    cursor = cursor.getNext();
+	String ans = "[ ";
+	if (size() > 0) {
+	    ans += front();
+	}
+	if (size() > 1){
+	    Node<E> current = _front.getNext();
+	    while (current != null){
+		ans += ", " + current.getValue();
+		current = current.getNext();
+	    }
 	}
 	ans += "]";
 	return ans;
     }
 
-    public static void main(String[] args){
-	NodeQueue<Integer> test = new NodeQueue<Integer>();
-	test.enqueue(1);
-	test.enqueue(2);
-	test.enqueue(3);
-	test.dequeue();
-	test.enqueue(4);
-	test.enqueue(5);
-	test.dequeue();
-	System.out.println(test);
+    public static void main(String [] args){
+	Queue<Integer> q = new NodeQueue<Integer>();
+	System.out.println(q);
+
+	for (int i = 0; i < 5 ; i++){
+	    q.enqueue(i);
+	    System.out.println("enqueue : " + i + " q: " + q);
+	}
+
+	while (!q.isEmpty()){
+	    if (Math.random() < 0.75)
+		System.out.println("dequeue " + q.dequeue() + " q: " + q);
+	    else {
+		int x = (int)(Math.random() * 100) ;
+		q.enqueue(x);
+		System.out.println("enqueue : " + x + " q: " + q);
+	    }
+	}
+
     }
 
-    
-} //end
+}
