@@ -8,16 +8,6 @@ public class NodeQueue<E> implements Queue<E>{
 	_size = 0;
     }
 
-    public static<E> void replace (Queue<E> q, E oldValue, E newValue){
-	int N = q.size();
-	Node<E> cursor = q.front();
-	for (int i = 0; i < N; i++){
-	    if (cursor.getValue().equals(oldValue))
-		cursor.setValue(newValue);
-	    cursor = cursor.getNext();
-	}
-    }
-    
     // O(1)
     public E front() throws EmptyQueueException{
 	if (isEmpty())
@@ -58,7 +48,7 @@ public class NodeQueue<E> implements Queue<E>{
     }
 
     public String toString(){
-	String ans = "[ ";
+	String ans = "[";
 	if (size() > 0) {
 	    ans += front();
 	}
