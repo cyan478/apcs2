@@ -1,40 +1,45 @@
 public class HotPotato{
 
-    public static boolean isChosen(int NumPlayers){
-	boolean ans = false;
-	int N = (int)(Math.random() * NumPlayers);
-	if (N == 0)
-	    ans = true;
-	return ans;
+   
+    private Queue<String> _players;
+
+    public HotPotato(String[] names){
+	_players = new ArrayQueue<String>(names.length);
+	for (String name : names)
+	    _players.enqueue(name);
     }
 
-    public void play(NodeQueue circle, int numPlayers, E current, int round){
-	System.out.println("Round #" + round + ": " + circle);
-	for (int i = 0; i < numPlayers; i++){
-	    current = circle.dequeue();
-	    if (isChosen(numPlayers)){
-		round++;
-		break;
+    public void play(double chance){
+	String removed;
+	int N = _players.size();
+	System.out.println("Children: " + _players);
+	while (N > 1){
+	   
+	    double r = Math.random();
+	    removed = _players.dequeue();
+	    if (r < chance ){
+		System.out.println("Hot Potato: " + removed);
 	    }
-	    else
-		
-		
+	    else{
+		_players.enqueue(removed);
+		System.out.println("Potato: " + removed);
+	    }
+	    System.out.println("Children: " + _players);
+	    N = _players.size();
 	}
+	System.out.println("Winner: " + _players.front());
+
     }
 
-    
+    public String toString(){
+	return _players.toString();
+    }
 
     public static void main(String[] args){
-	NodeQueue circle = new NodeQueue<String>();
-	circle.enqueue("a");
-	circle.enqueue("b");
-	circle.enqueue("c");
-	circle.enqueue("d");
-	circle.enqueue("e");
-	circle.enqueue("f");
-	circle.enqueue("g");
-	System.out.println("Circle: " + circle);
-	play(circle, circle.front(), circle.size(), 0);
+	String [] names = {"Bobby","Sue", "Amy", "Mark", "Danny", "Kelly", "Yuki"};
+	HotPotato game = new HotPotato(names);
+	double chance = Double.parseDouble(args[0]);
+	game.play(chance);
     }
 
 } //end

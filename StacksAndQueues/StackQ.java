@@ -1,3 +1,5 @@
+//Create the class Stackq that uses 2 queues to implement a stack.
+
 public class StackQ implements Stack{
 
     private Queue<E> _main, _temp;
@@ -28,15 +30,12 @@ public class StackQ implements Stack{
     }
 
     public void push(E val){
-	if (_main.isEmpty()) _main.enqueue(val);
-	else{
-	    while (!_main.isEmpty()){
-		_temp.enqueue(_main.dequeue());
-	    }
-	    _main.enqueue(val);
-	    while (!_temp.isEmpty())
-		main.enqueue(_temp.dequeue());
-	}
+        _temp.enqueue(val);
+	while (_main.isEmpty())
+	    _temp.enqueue(_main.dequeue);
+	Queue<E> holder = _main;
+	_main = _temp;
+	_temp = _holder;
     }
 
     public String toString(){
