@@ -16,5 +16,17 @@ public interface Deque<E>{
 
     public boolean isEmpty();
 
+    public boolean offerFirst(E element);
+
+    public boolean offerLast(E element);
+
+    public E pollFirst();
+
+    public E pollLast();
+
+    public E peekFirst();
+
+    public E peekLast();
+    
 
 } //end

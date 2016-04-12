@@ -23,6 +23,26 @@ size() 		returns the number of elements in the deque
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 isEmpty() 	returns true if the deque is empty; false otherwise
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+offerFirst(e) 	Inserts e at the head of the deque unless the deque
+		is full, in which case this method returns false;
+		if the method succeeds, it returns true
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+offerLast(e) 	Inserts e at the tail of the deque unless the deque 
+		is full, in which case this method returns false;
+		if the method succeeds, it returns true
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+pollFirst()	Removes and returns the first element of the deque;
+		if the deque is empty, this method returns null.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+pollLast()	Removes and returns the last element of the deque;
+		if the deque is empty, this method returns null.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+peekFirst() 	Returns, but does not remove the first element of the
+		deque; if the deque is empty, this method returns null.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+peekLast() 	Returns, but does not remove the last element of the
+		deque; if the deque is empty, this method returns null.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 D = [1,2,3,4,5,6,7,8]
 
