@@ -31,18 +31,41 @@ public class ArrayDeque<E> implements Deque<E>{
 
     public E getLast() throws EmptyDequeException{
 	if (isEmpty())
-	    throw new 
+	    throw new EmptyDequeException("Empty");
+	return _array[_capacity-1];
     }
     
-    public void addFirst(E element);
+    public void addFirst(E element) throws FullDequeException{
+        if (size() == _capacity-1)
+	    throw new FulldequeException("Full");
+	for (int i = size; i > 0; i--)
+	    _array[i+1] = _array[i];
+	_array[0] = element;
+    }
 
-    public void addlast(E element);
+    public void addlast(E element){
+	if (size() == _capacity-1)
+	    throw new FullDequeException("Full");
+	_array[size+1] = element;
+    }
 
-    public E removeFirst() throws EmptyDequeException;
+    public E removeFirst() throws EmptyDequeException{
+	E ans = getFirst(); //takes care of exception
+	for (int i = 0; i < size; i++){
+	    _array[i] = _array[i+1];
+	}
+	return ans;
+    }
 
-    public E removeLast() throws EmptyDequeException;
+    public E removeLast() throws EmptyDequeException{
+	E ans = getLast();
+	_array[size] = null;
+	return ans;
+    }
 
-    public boolean offerFirst(E element);
+    public boolean offerFirst(E element){
+	
+    }
 
     public boolean offerLast(E element);
 
