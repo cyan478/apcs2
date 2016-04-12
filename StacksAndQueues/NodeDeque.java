@@ -1,11 +1,13 @@
-public class NodeDeque <E> implements Deque<E>{
+public class NodeDeque<E> implements Deque<E>{
 
-    private NodeDeque<E> _deque;
+    private DNode<E> _head, _tail;
     private int _size;
     
     public NodeDeque(){
+	_head = new DNode<E>(null,null,null);
+	_tail = new DNode<E>(null,_head,null);
+	_head.setNext(_tail);
 	_size = 0;
-      
     }
 
     public int size(){
@@ -16,20 +18,74 @@ public class NodeDeque <E> implements Deque<E>{
 	return size() == 0;
     }
 
-    public void addFirst(E element){
-	if (isEmpty())
-	    _deque = 
+    public E getFirst() throws EmptyDequeException{
+	if (isEmpty()) throw new EmptyDequeException("Empty");
+	return _head.getNext().getValue();
     }
 
-    public void addlast(E element);
+    public E getLast() throws EmptyDequeException{
+	if (isEmpty()) throw new EmptyDequeException("Empty");
+	return _tail.getPrevious().getValue();
+    }
 
-    public E removeFirst() throws EmptyDequeException;
 
-    public E removeLast() throws EmptyDequeException;
+    public void addFirst(E val){
+	DNode<E> n = new DNode(val, _head, _head.getNext());
+	n.getNext().setPrevious(n);
+	head.setNext(n);
+	_size++;
+    }
 
-    public E getFirst() throws EmptyDequeException;
+    public void addlast(E element){
+	DNode<E> n = new DNode(val, _tail.getPrevious, _tail);
+	n.getPrevious().setNext(n);
+        tail.setPrevious(n);
+	_size++;
+    }
 
-    public E getLast() throws EmptyDequeException;
+    public E removeFirst() throws EmptyDequeException{
+        E ans = getFirst();
+	DNode<E> temp = _head.getNext();
+	_head.setNext(temp.getNext());
+	temp.getNext().setPrevious(_head);
+	temp.setPrevious(null);
+	temp.setNext(null);
+	_size--;
+	return ans;
+    }
 
+    public E removeLast() throws EmptyDequeException{
+	
+    }
+
+    public boolean offerFirst(E element){
+	addFirst(e);
+	return true;
+    }
+
+    public boolean offerLast(E element){
+	addLast(e);
+	return true;
+    }
+
+    public E pollFirst(){
+	if (isEmpty()) return null;
+	return removeFirst();
+    }
+
+    public E pollLast(){
+	if (isEmpty()) return null;
+	return removeLast();
+    }
+
+    public E peekFirst(){
+	if (isEmpty()) return null;
+	return getFirst();
+    }
+
+    public E peekLast(){
+       	if (isEmpty()) return null;
+	return getLast();
+    }
 
 } //end
