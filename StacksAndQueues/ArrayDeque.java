@@ -33,28 +33,28 @@ public class ArrayDeque<E> implements Deque<E>{
     public E getFirst() throws EmptyDequeException{
 	if (isEmpty()) 
 	    throw new EmptyDequeException("Empty");
-	return _array[floorMod(_head,_size)]; //mod?
+	return _array[floorMod(_head,_capacity)]; //mod?
     }
 
     public E getLast() throws EmptyDequeException{
 	if (isEmpty())
 	    throw new EmptyDequeException("Empty");
-	return _array[floorMod(_tail,_size)];
+	return _array[floorMod(_tail,_capacity)];
     }
     
     public void addFirst(E element) throws FullDequeException{
-        if (size() == _capacity-1)
+        if (_head == _tail)
 	    throw new FullDequeException("Full");
-	int modded = floorMod(_head,_size);
+	int modded = floorMod(_head,_capacity);
 	_array[modded] = element;
 	_head--;
 	_size++;
     }
 
-    public void addLast(E element){
-	if (size() == _capacity-1)
+    public void addLast(E element) throws FullDequeException{
+	if (_head == _tail)
 	    throw new FullDequeException("Full");
-	int modded = floorMod(_tail, _size);
+	int modded = floorMod(_tail, _capacity);
 	_array[modded] = element;
 	_tail++;
 	_size++;
@@ -62,15 +62,15 @@ public class ArrayDeque<E> implements Deque<E>{
 
     public E removeFirst() throws EmptyDequeException{
 	E ans = getFirst(); //takes care of exception
-	for (int i = 0; i < _size; i++){
-	    _array[i] = _array[i+1];
-	}
+	_head++;
+	_size--;
 	return ans;
     }
 
     public E removeLast() throws EmptyDequeException{
 	E ans = getLast();
-	_array[_size] = null;
+	_tail--;
+	_size--;
 	return ans;
     }
 
