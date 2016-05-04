@@ -1,14 +1,61 @@
-public class Animal{
+public abstract class Animal {
     
-    protected int _index;
+    protected Ecosystem _eco;
+    protected Animal[] _river;
+    protected int _currentPos;
+    protected String _gender;
+    protected double _strength;
 
-    public Animal(int i){
-	_index = i; 
+    public Animal(Ecosystem eco, int pos){
+	_eco = eco;
+	_river = eco.getRiver();
+	_currentPos = pos;
+
+	int r = (int)(Math.random()*2);
+	if (r = 0) _gender = "M";
+	else _gender = "F";
+
+	_strength = Math.random() * 5;
+	
     }
 
-    public Animal mate(Animal a, int i){
-	return new Animal(i);
+    public void move(){
+	int[] deltas = {-1, 0, 1};
+	int r = (int) (Math.random() * deltas.length);
+	int dx = deltas[r];
+	int nextPos = _currentPos + dx;
+       	if (nextPos < 0 || nextPos >= _river.length )
+	    nextPos = _currentPos;
+	else if ( nextPos != _currentPos && _river[nextPos] != null ){
+	    interact(_river[nextPos]);
+	}
+	else{
+	    _river[_currentPos] = null;
+	    _currentPos = nextPos;
+	    _river[_currentPos] = this;
+	}
     }
 
+    public abstract void interact(Animal other);
+   
+    public int offSpringPos(){
+	int r = _eco.getRandomPos();
+	if ( r == -1) return -1;
+	return r;
+    }
 
-} //end
+    public void die(){
+	_river[_currentPos] = null;
+	_eco.updateSize(-1);
+    }   
+
+    
+
+
+    public String toString(){
+	return "Animal";
+    }
+
+   
+
+}
