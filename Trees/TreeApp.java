@@ -21,6 +21,28 @@ public class TreeApp{
 	System.out.print(root.getValue() + " ");
     }
 
+    public static<E> int countNodes(TreeNode<E> rt){
+        if (rt == null) return 0;
+	return 1+countNodes(rt.getLeft()) + countNodes(rt.getRight());
+    }
+
+    public static<E> boolean isLeaf(TreeNode<E> rt){
+	return (rt!= null && rt.getLeft() == null && rt.getRight() == null);
+    }
+
+    public static<E> int height(TreeNode<E> rt){
+	if (rt==null || isLeaf(rt)) return 0;
+	int leftCount = height(rt.getLeft());
+	int rightCount = height(rt.getRight());
+	return 1 + Math.max(leftCount,rightCount);
+    }
+
+    public static<E> int countLeaves(TreeNode<E> rt){
+	if (rt==null) return 0;
+	if (isLeaf(rt)) return 1;
+	return countLeaves(rt.getLeft()) + countLeaves(rt.getRight());
+    }
+
     public static void main(String[] args){
 	TreeNode<Integer> root = new TreeNode(1,null,null);
 	root.setLeft(new TreeNode<Integer>(2,null,
