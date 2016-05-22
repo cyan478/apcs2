@@ -17,7 +17,7 @@ public class scnr {
         //the above is for strings, how can we get numbers they type in?
         System.out.print("Type in number: ");
         int datnumber = io.nextInt();
-        System.out.println("Your IQ is " + datnumber + ".");
+        System.out.println("Your IQ is " + datnumber + "."); 
 
     }
 }
