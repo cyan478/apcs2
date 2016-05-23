@@ -12,6 +12,10 @@ public class Demo{
 	    list[i] = q.poll(); //ordering in list, O(log N)
     }
 
+    public static void add(int v, ArrayList<Integer> heap){
+	
+    }
+
     public static void main(String[] args){
 	String [] fruits = {"kiwi","pear","apple","banana","watermelon",
 			    "grapes","cantalope","orange"};
